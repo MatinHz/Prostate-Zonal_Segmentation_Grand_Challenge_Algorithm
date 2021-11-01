@@ -26,7 +26,10 @@ class Am_zonal_zegmentation_gca(SegmentationAlgorithm):
         print('RUNNING THE SEGMENTATION MODEL...')
         # input directory that contains three orthogonal images (tra, sag, cor), which are needed for preprocessing
         inputDir = '/input/images/'
+
+        # output directory to write the predicted segmentation
         outputDir = '/output/images/prostate-zonal-segmentation/'
+
         arr = preprocessing.preprocessImage(inputDir)
         pred_arr = UNet_zones.predict(arr, modelName = 'model/model.h5')
         pred_arr = np.asarray(pred_arr)
@@ -40,7 +43,7 @@ class Am_zonal_zegmentation_gca(SegmentationAlgorithm):
 
         SimpleITK.WriteImage(pred_img, os.path.join(outputDir, 'predicted_roi.mha'))
         
-        print('RUNNING THE SEGMENTATION MODEL HAS FINISHED')
+        print('RUNNING THE SEGMENTATION MODEL HAS BEEN SUCCESSFULLY FINISHED!')
 
         return pred_img
 
